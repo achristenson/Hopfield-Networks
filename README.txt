@@ -139,4 +139,5 @@ Network. This can be done in the Hopfield.py file.
 A good reference for someone who has built a network specifically for
 image reconstruction is here: https://github.com/yosukekatada/Hopfield_network/blob/master/hopfield.py
 
-
+A blog post that gave a good explanation for the math involved, and
+which helped writing the basic network is here: http://neupy.com/2015/09/20/discrete_hopfield_network.html
