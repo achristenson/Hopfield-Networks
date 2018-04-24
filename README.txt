@@ -129,3 +129,6 @@ combinations of the memory that form stable equilibria in the phase
 flow of the system. The system responds to an ambiguous stimulation
 by making a statistical choice between memory states.
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Our objectives for the program
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
