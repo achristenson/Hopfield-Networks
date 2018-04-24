@@ -132,3 +132,11 @@ by making a statistical choice between memory states.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Our objectives for the program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+First thing we should build is the basic framework for a Hopfield 
+Network. This can be done in the Hopfield.py file.
+
+A good reference for someone who has built a network specifically for
+image reconstruction is here: https://github.com/yosukekatada/Hopfield_network/blob/master/hopfield.py
+
+
