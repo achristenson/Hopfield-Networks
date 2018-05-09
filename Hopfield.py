@@ -23,13 +23,15 @@ class Hopfield:
 		temp_W = np.outer(x,x.transpose())	# Gets weights via matrix math from data input
 		temp_W = temp_W - np.identity(len(x))			# Removes self weights from calculation
 		print(temp_W)
-		# self.update_Energy(x)				# Update network energy
+		self.update_Energy(x)				# Update network energy
 		# Check if the weight matrix has been initialized
 		if self.hasRun == False:
 			self.hasRun = True
 			self.W = temp_W					# Initializes the weight matrix
 		else:
 			self.W = self.W + temp_W		# Updates the hopfield networks weight matrix
+
+		print(self.W)
 
 	# Calculate and update Hopfield Energy, only works with vector inputs
 	def update_Energy(self,x):
@@ -41,6 +43,7 @@ class Hopfield:
 		for n in range(iters):
 			i = np.random.randint(len(self.W[0]),size=1)	# Choose a random neuron to fire off
 			xp = x.transpose()*self.W[:,i]					# Use a dummy to get the product
-			x[i] = np.sign(xp)								# Modify the neuron and repeat
-			print(n)
+			x[i] = xp										# Modify the neuron and repeat
+		x[x>=0] = 1
+		x[x<0] = -1
 		return x

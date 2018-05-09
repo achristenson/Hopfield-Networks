@@ -16,25 +16,33 @@ def mat2vec(a):
 my_network = Hopfield()
 
 # Process Data Here ~~~~~~~ Whatever you want
-I = -1*np.ones([21,21])
-I[0,:] = 1
-I[20,:] = 1
-I[:,10] = 1
+I = -1*np.ones([17,17])
+L = I
+L[:,0] = 1.0
+L[16,:] = 1.0
+I[0,:] = 1.0
+I[16,:] = 1.0
+I[:,8] = 1.0
 H = I.transpose()
 
 # Use the network!
 # my_network.learn(Whatever you wanna learn! :)
 
 Iprime = I
-Iprime[1,1:10] = 1
+Iprime[1,1:10] = 1.0
 
 I = mat2vec(I)
+L = mat2vec(L)
 H = mat2vec(H)
 Iprime = mat2vec(Iprime)
 
 my_network.train(I)
 print('Done training I')
-my_network.train(H)
-# my_network.train(L)
-print('Done Training')
-print(my_network.recover(Iprime, 100).reshape((21,21)))
+#my_network.train(H)
+#print('Done Training H')
+my_network.train(L)
+print('Done Training L')
+
+for i in range(1):
+	Iprime = my_network.recover(Iprime, 1)
+	print(Iprime.reshape((17,17)))
