@@ -21,8 +21,9 @@ class Hopfield:
 	# Can take single set of training data as vector or multiple sets as matrix
 	def train(self, x):
 		temp_W = np.outer(x,x.transpose())	# Gets weights via matrix math from data input
-		np.fill_diagonal(temp_W,0)			# Removes self weights from calculation
-		self.update_Energy(x)				# Update network energy
+		temp_W = temp_W - np.identity(len(x))			# Removes self weights from calculation
+		print(temp_W)
+		# self.update_Energy(x)				# Update network energy
 		# Check if the weight matrix has been initialized
 		if self.hasRun == False:
 			self.hasRun = True
@@ -38,7 +39,8 @@ class Hopfield:
 	# Function which takes in an estimate and returns an approximation from memory
 	def recover(self, x, iters):
 		for n in range(iters):
-			i = np.random.randint(len(self.W[0]),size=1)			# Choose a random neuron to fire off
-			xp = x.transpose().dot(self.W[:,i])	# Use a dummy to get the product
-			x[i] = np.sign(xp)					# Modify the neuron and repeat
+			i = np.random.randint(len(self.W[0]),size=1)	# Choose a random neuron to fire off
+			xp = x.transpose()*self.W[:,i]					# Use a dummy to get the product
+			x[i] = np.sign(xp)								# Modify the neuron and repeat
+			print(n)
 		return x
