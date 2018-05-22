@@ -9,7 +9,7 @@ class Hopfield:
 	# Initialize the network with the required parameters
 	def __init__(self):
 		self.hasRun = False		# Create a matrix for storing the weights of neuron connections
-		self.W = 0				# Initialize weight matrix
+		self.W = None			# Initialize weight matrix
 		self.E = 0				# Store the energy of the network
 		self.theta = 0.5		# Create a bias, theta
 		
@@ -22,16 +22,9 @@ class Hopfield:
 
 	# Updates the weight matrix
 	def update_Weights(self,x):
-		w = np.zeros([len(x),len(x)]) 		# Initializes weights as 0
-		# Iterates each of the elements in the future weight matrix, does computation and saves as dummy
-		for j in range(len(x)):
-			for i in range(j,len(x)):
-				if i==j:
-					w[i,j] = 0
-				else:
-					w[i,j] = x[i]*x[j]
-					w[j,i] = w[i,j]
-
+		# Using vector math, compute the input specific weights - outer product between input vector and its transpose
+		w = np.outer(x,x.T)
+		w = w-np.identity(len(x)) 			# Force self weights to 0
 		# Determines if the weight matrix has already been created, if not initialize, else add to existing weights
 		if self.hasRun == False:
 			self.hasRun = True
@@ -49,8 +42,9 @@ class Hopfield:
 	def recover(self, x, iters):
 		for n in range(iters):
 			i = np.random.randint(len(self.W[0]),size=1)	# Choose a random neuron to fire off
-			xp = x.transpose()*self.W[:,i]					# Use a dummy to get the product
-			x[i] = xp										# Modify the neuron and repeat
-		x[x>=0] = 1
-		x[x<0] = -1
+			xp = np.dot(x.transpose(),self.W[:,i])			# Use a dummy to get the product
+			if xp >= 0:
+				x[i] = 1
+			else:
+				x[i] = -1
 		return x
